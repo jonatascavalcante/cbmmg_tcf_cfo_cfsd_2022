@@ -1,1 +1,1 @@
-# cbmmg_tcf_cfo_cfsd_2022
+Web interface that calculates the military score for firefighter public contest
