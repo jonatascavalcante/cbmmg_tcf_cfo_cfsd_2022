@@ -60,7 +60,7 @@ $(document).ready(function() {
 			gender = 'female';
 			$("#strength_test").html("Barra Estática");
 			strength = $("#barsTime").val();
-			strengthNote = calculate_fem_bars(convertTime(strength, 100));
+			strengthNote = calculate_fem_bars(convertTime(strength, 100, ":"));
 			$("#strength_note").html(strengthNote);
 		} else {
 			$("#strength_test").html("Barra Dinâmica");
@@ -81,11 +81,11 @@ $(document).ready(function() {
 		
 		absNote = calculate_abdominal_score(gender, absQtd);
 		$("#abs_note").html(absNote);
-		shuttleRunNote = calculate_shuttle_run_score(convertTime(shuttlerunTime, 100));
+		shuttleRunNote = calculate_shuttle_run_score(convertTime(shuttlerunTime, 100, '"'));
 		$("#shuttle_run_note").html(shuttleRunNote);
-		runningNote = calculate_running_score(gender, convertTime(runningTime, 60));
+		runningNote = calculate_running_score(gender, convertTime(runningTime, 60, ":"));
 		$("#running_note").html(runningNote);
-		swimmingNote = calculate_swimming_score(gender, convertTime(swimmingTime, 60));
+		swimmingNote = calculate_swimming_score(gender, convertTime(swimmingTime, 60, ":"));
 		$("#swimming_note").html(swimmingNote);
 
 		tcfScore = (strengthNote + absNote + shuttleRunNote + runningNote + swimmingNote)/5;
@@ -99,8 +99,8 @@ $(document).ready(function() {
 		var shuttlerunTime = $(this).val();
 		var input;
 		if (shuttlerunTime.length == 4 && (shuttlerunTime[0] == '9' || shuttlerunTime[0] == '8')) {
-			input = shuttlerunTime.split(':')[0] + shuttlerunTime.split(':')[1];
-			$(this).val(input[0] + ':' + input[1] + input[2]);
+			input = shuttlerunTime.split('"')[0] + shuttlerunTime.split('"')[1];
+			$(this).val(input[0] + '"' + input[1] + input[2]);
 		}
 	});
 
@@ -116,12 +116,11 @@ $(document).ready(function() {
 
 });
 
-function convertTime(time, cons) 
+function convertTime(time, cons, separator)
 {
 	var firstPart, secondPart, convertedTime;
-	firstPart = parseInt(time.split(':')[0]);
-	secondPart = parseInt(time.split(':')[1]);
+	firstPart = parseInt(time.split(separator)[0]);
+	secondPart = parseInt(time.split(separator)[1]);
 	convertedTime = firstPart * cons + secondPart;
 	return convertedTime;
 }
-
