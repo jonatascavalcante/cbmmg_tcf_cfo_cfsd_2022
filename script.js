@@ -85,7 +85,7 @@ $(document).ready(function() {
 		$("#shuttle_run_note").html(shuttleRunNote);
 		runningNote = calculate_running_score(gender, convertTime(runningTime, 60, ':'));
 		$("#running_note").html(runningNote);
-		swimmingNote = calculate_swimming_score(gender, convertTime(swimmingTime, 60, ':'));
+		swimmingNote = calculate_swimming_score(gender, convertTime(swimmingTime, 1, '"'));
 		$("#swimming_note").html(swimmingNote);
 
 		tcfScore = (strengthNote + absNote + shuttleRunNote + runningNote + swimmingNote)/5;
@@ -110,6 +110,14 @@ $(document).ready(function() {
 		if (barsTime.length == 4 && (barsTime[0] == '9' || barsTime[0] == '8')) {
 			input = barsTime.split('"')[0] + barsTime.split('"')[1];
 			$(this).val(input[0] + '"' + input[1] + input[2]);
+		}
+	});
+
+	$("#swimmingTime").keyup(function(event) {
+		var swimmingTime = $(this).val();
+		var input;
+		if (swimmingTime.length == 2 && event.keyCode !== 8) {
+			$(this).val(swimmingTime + "\"00");
 		}
 	});
 
